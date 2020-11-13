@@ -1,0 +1,46 @@
+{% extends 'portfolio/base.html' %}
+
+{% load static %}
+
+{%  block content %}
+
+<div class="row justify-content-center my-3">
+  <div class="col-5">
+    <img id="photo" class="img-fluid" src="{% static 'portfolio/zdj.jpg' %}">
+  </div>
+</div>
+
+<div class="row justify-content-center mb-3">
+  <div class="col-md-9 text-center">
+    <h3 id="hometext" class="font-weight-bold">Hi, my name is Kamil. I'm studying at Warsaw Uniwersity of Technology, and i'm at the beginning of my programming career.</h3>
+  </div>
+</div>
+
+<h2 class="mt-5">Portfolio</h2>
+<hr>
+
+
+<div class="card-deck">
+  {% for project in projects %}
+  <div class="card">
+
+    <img src="{{ project.image.url }}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ project.title }}</h5>
+      <p class="card-text text-bottom">{{ project.description }}</p>
+      {% if project.url %}
+      <a role="button" href="{{ project.url }}" class="btn btn-primary">Link to website</a>
+      <br>
+      <a role="button" target="_blank" href="{{ project.github_url }}"><i class="fab fa-github-square"></i></a>
+
+      {% else %}
+      <a role="button" target="_blank" href="{{ project.github_url }}"><i class="fab fa-github-square"></i></a>
+
+      {% endif %}
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
